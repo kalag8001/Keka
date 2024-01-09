@@ -1,0 +1,18 @@
+import java.util.*
+
+data class Task(
+    val title: String,
+    val description: String,
+    val dueDate: Date,
+    val priority: Priority,
+    val category: String,
+    val status: Status
+)
+
+enum class Priority {
+    LOW, MEDIUM, HIGH
+}
+
+enum class Status {
+    NEW, IN_PROGRESS, COMPLETED
+}

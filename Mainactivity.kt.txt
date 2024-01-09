@@ -1,0 +1,57 @@
+import android.os.Bundle
+import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+
+class MainActivity : AppCompatActivity() {
+
+    private val tasks = mutableListOf<Task>()
+    private lateinit var adapter: TaskAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        adapter = TaskAdapter(tasks)
+        recyclerViewTasks.adapter = adapter
+        recyclerViewTasks.layoutManager = LinearLayoutManager(this)
+
+        // Spinner for Priority Levels
+        val priorityLevels = arrayOf("Low", "Medium", "High")
+        val priorityAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, priorityLevels)
+        spinnerPriority.adapter = priorityAdapter
+
+        // Spinner for Task Status
+        val statusOptions = arrayOf("New", "In Progress", "Completed")
+        val statusAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, statusOptions)
+        spinnerStatus.adapter = statusAdapter
+
+        buttonAdd.setOnClickListener {
+            val taskTitle = editTextTaskTitle.text.toString().trim()
+            val taskDescription = editTextTaskDescription.text.toString().trim()
+            val dueDate = Date() // Set a default due date for simplicity
+            val priority = Priority.valueOf(spinnerPriority.selectedItem.toString().toUpperCase())
+            val category = editTextTaskCategory.text.toString().trim()
+            val status = Status.valueOf(spinnerStatus.selectedItem.toString().toUpperCase())
+
+            if (taskTitle.isNotEmpty() && taskDescription.isNotEmpty() && category.isNotEmpty()) {
+                val task = Task(taskTitle, taskDescription, dueDate, priority, category, status)
+                tasks.add(task)
+                adapter.notifyDataSetChanged()
+                clearInputs()
+            }
+        }
+    }
+
+    private fun clearInputs() {
+        editTextTaskTitle.text.clear()
+        editTextTaskDescription.text.clear()
+        editTextTaskCategory.text.clear()
+        spinnerPriority.setSelection(0)
+        spinnerStatus.setSelection(0)
+    }
+}
