@@ -1,4 +1,8 @@
 # Keka
+Project Title: Build a Simple To-Do List Application.
+
+Objective: 
+Develop a fully functional to-do list application that allows users to manage their tasks effectively. The app should be intuitive and user-friendly. 
 I have separately uploaded the files for better clarity, including activity.xml, task.kt, taskada.kt, mainactivity.kt and task.html. Please review each file to gain a clearer understanding.
 
 Here's a brief explanation of my project:
@@ -39,6 +43,7 @@ Conclusion:
    - The Task Management app is a powerful tool for individuals seeking a structured approach to task organization, enhancing productivity and effective daily task management.
 
 *Instructions on how to set up and run the application :
+
 To set up and run the Android application I've developed in Android Studio, follow these steps:
 
 1. Ensure Android Studio Installation:
